@@ -1,0 +1,66 @@
+{
+  "name": "scalajs-react-electron",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/trepidacious/scalajs-react-electron",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "scalajs",
+    "react",
+    "material-ui",
+    "demo"
+  ],
+  "author": "trepidacious",
+  "license": "Apache-2.0",
+  "build": {
+    "appId": "org.rebeam.scalajs-react-electron",
+    "files": [
+      "src",
+      "scalajs_src"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "nsis": {
+      "createDesktopShortcut": "always"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "category": "Development"
+    }
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.5.1",
+    "@material-ui/icons": "^2.0.3",
+    "downshift": "^2.1.5",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "typeface-roboto": "0.0.54"
+  },
+  "devDependencies": {
+    "electron": "^2.0.0",
+    "electron-builder": "^20.28.4"
+  }
+}
