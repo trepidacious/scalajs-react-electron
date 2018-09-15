@@ -58,7 +58,6 @@ lazy val scalajsReactElectron = crossProject(JSPlatform, JVMPlatform).in(file(".
     //Output scalajs and js dependencies to source folder for electron project
     crossTarget in (Compile, fullOptJS) := scalaJsSrcDir,
     crossTarget in (Compile, fastOptJS) := scalaJsSrcDir,
-    crossTarget in (Compile, packageJSDependencies) := scalaJsSrcDir,
 
     //Produce a module, so we can use @JSImport.
     // scalaJSModuleKind := ModuleKind.CommonJSModule//,
