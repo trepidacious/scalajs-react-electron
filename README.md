@@ -13,7 +13,9 @@ The Scalajs code depends on several projects that are not yet published - so you
 Next, clone this project, and start up two terminals:
 
 1. In the first, change to the `scala_project_root` directory, then run `sbt fastOptJS`.
-2. In the second, stay in the project root and run `npm install` then `npm start`
+2. In the second, stay in the project root and run `yarn` then `yarn start`
+
+Note that electron-build recomments using Yarn, so we do. However npm should also work.
 
 ## Design
 
@@ -31,7 +33,6 @@ For packaging, the project uses electron-builder, with a simple configuration in
 ## TODO
 
 1. It should be possible to replicate `main.js` in scalajs with an appropriate facade to electron API, and then simply require and run this from a stub in `main.js`.
-2. Use Yarn rather than NPM, as recommented by electron-builder.
-3. Add more information on packaging
-4. Test and demonstrate auto-update.
-5. Check build on OS X (dmg)
+2. Add more information on packaging
+3. Test and demonstrate auto-update.
+4. Check build on OS X (dmg)
