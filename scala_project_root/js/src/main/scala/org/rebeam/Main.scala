@@ -37,7 +37,7 @@ object Main {
       // MainView("World")
       // DownshiftDemo.ctor(DownshiftDemo.Props(DownshiftDemo.countries))
         TextFieldDemo.ctor(),
-        mui.Card(component = "div":js.Any, raised = true, elevation = 1)(<.span("Hi!"))
+        mui.Card(component = "div":js.Any, raised = true, elevation = 1)(<.span("New!"))
       )
     ).renderIntoDOM(dom.document.getElementById("App"))
 

@@ -30,9 +30,42 @@ The project doesn't use electron-webpack or electron-forge. As far as I can tell
 
 For packaging, the project uses electron-builder, with a simple configuration in `package.json`. Run `yarn dist` to build and package. This will produce an nsis installer on Windows, and an AppImage and snap package on Linux. Should produce a dmg on OS X - not yet tried.
 
+## Publishing and auto-update
+
+This uses `electron-updater`. Configured in `package.json`, using the `publish` key in `build`.
+
+This is currently configured to use `generic`, so it can run from a static server on localhost, however to configure for github use:
+
+```json
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "your-github-user",
+        "repo": "your-repo"
+      }
+    ]
+```    
+
+`main.js` has a minimal updater implementation that will start the auto-updater when application starts (skipped in dev mode), and install updates when application is restarted.
+So far this has only been tried on Windows.
+
+To try this:
+
+1. Package the application using `yarn dist`
+2. Install the application using the installer in `dist` directory (the auto-updater is not started in dev mode). This is only needed for the first version used.
+3. Increment the version number in `package.json`, and make some change to the application (e.g. the text in the card in `Main.scala`).
+4. Package the new version using `yarn dist`
+5. In the project root, run an http server serving the `dist` directory - this is our "generic" build server:
+```
+node_modules/.bin/http-server dist/ -p 8080
+```
+6. Run the installed application. It will download the update in the background (you can see this from the output of the http server)
+7. When the update has downloaded, quit and rerun the application. The NSIS installer will run again, and you should be up to date.
+
+See [electron updater example](https://github.com/iffy/electron-updater-example) for more details.
+
 ## TODO
 
 1. It should be possible to replicate `main.js` in scalajs with an appropriate facade to electron API, and then simply require and run this from a stub in `main.js`.
-2. Add more information on packaging
-3. Test and demonstrate auto-update.
-4. Check build on OS X (dmg)
+2. Check running, packaging, installing (via dmg) and auto-updating on OS X
+3. Add notifications in the main window when update is available, to demonstrate IPC.

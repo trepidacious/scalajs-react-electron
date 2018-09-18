@@ -1,5 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron');
+const {autoUpdater} = require("electron-updater");
+const log = require('electron-log');
+const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,7 +12,12 @@ const isDevMode = process.execPath.match(/[\\/]electron/);
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 800, 
+    height: 600,
+    backgroundColor: '#312450',
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+  })
 
   // and load the index.html of the app.
   mainWindow.loadFile('./src/index.html')
@@ -48,5 +56,41 @@ app.on('activate', function () {
   }
 })
 
+
+
+//-------------------------------------------------------------------
+// Auto updates
+//
+// This will immediately download an update, then install when the
+// app quits.
+//-------------------------------------------------------------------
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
+
+app.on('ready', function()  {
+  if (!isDevMode) {
+    autoUpdater.checkForUpdatesAndNotify();
+  }
+});
+
+// autoUpdater.on('checking-for-update', () => {
+//   log.info('checking-for-update');
+// })
+// autoUpdater.on('update-available', (ev, info) => {
+//   log.info('update-available');
+// })
+// autoUpdater.on('update-not-available', (ev, info) => {
+//   log.info('update-not-available');
+// })
+// autoUpdater.on('error', (ev, err) => {
+//   log.info('error');
+// })
+// autoUpdater.on('download-progress', (ev, progressObj) => {
+//   log.info('download-progress');
+// })
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+

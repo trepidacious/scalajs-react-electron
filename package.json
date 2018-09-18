@@ -1,6 +1,6 @@
 {
   "name": "scalajs-react-electron",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "A minimal Electron application",
   "main": "./src/main.js",
   "scripts": {
@@ -49,7 +49,13 @@
     },
     "linux": {
       "category": "Development"
-    }
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080/"
+      }
+    ]
   },
   "dependencies": {
     "@material-ui/core": "^1.5.1",
@@ -57,10 +63,13 @@
     "downshift": "^2.1.5",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "typeface-roboto": "0.0.54"
+    "typeface-roboto": "0.0.54",
+    "electron-log": "^2.2.17",
+    "electron-updater": "^3.1.2"
   },
   "devDependencies": {
     "electron": "^2.0.0",
-    "electron-builder": "^20.28.4"
+    "electron-builder": "^20.28.4",
+    "http-server": "^0.11.1"
   }
 }
