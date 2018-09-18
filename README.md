@@ -47,19 +47,19 @@ This is currently configured to use `generic`, so it can run from a static serve
 ```    
 
 `main.js` has a minimal updater implementation that will start the auto-updater when application starts (skipped in dev mode), and install updates when application is restarted.
-So far this has only been tried on Windows.
+So far this has only been tried on Windows (using nsis installer exe) and Ubuntu 18.04 (using AppImage).
 
 To try this:
 
 1. Package the application using `yarn dist`
-2. Install the application using the installer in `dist` directory (the auto-updater is not started in dev mode). This is only needed for the first version used.
+2. Install the application using the installer in `dist` directory (the auto-updater is not started in dev mode). This is only needed for the first version used. On Windows, double-click the nsis installer .exe, on Linux just copy the AppImage somewhere convenient, make it executable if needed, and double click to test running.
 3. Increment the version number in `package.json`, and make some change to the application (e.g. the text in the card in `Main.scala`).
 4. Package the new version using `yarn dist`
 5. In the project root, run an http server serving the `dist` directory - this is our "generic" build server:
 ```
 node_modules/.bin/http-server dist/ -p 8080
 ```
-6. Run the installed application. It will download the update in the background (you can see this from the output of the http server)
+6. Run (or restart) the installed application. It will download the update in the background (you can see this from the output of the http server)
 7. When the update has downloaded, quit and rerun the application. The NSIS installer will run again, and you should be up to date.
 
 See [electron updater example](https://github.com/iffy/electron-updater-example) for more details.
