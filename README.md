@@ -28,7 +28,7 @@ The project has a fairly simple structure:
 
 The project doesn't use electron-webpack or electron-forge. As far as I can tell these only really help with transpiling javascript alternatives to javascript, and we are only using plain javascript and scalajs. The project is significantly quicker to start up electron than previous versions using electron-forge and electron-webpack. This does mean that hot-reload is not supported, which might not be a bad thing. Reload the page for scalajs changes, and restart with `npm start` for main.js changes.
 
-For packaging, the project uses electron-builder, with a simple configuration in `package.json`. Run `yarn dist` to build and package. This will produce an nsis installer on Windows, and an AppImage and snap package on Linux. Should produce a dmg on OS X - not yet tried.
+For packaging, the project uses electron-builder, with a simple configuration in `package.json`. Run `yarn dist` to build and package. This will produce an nsis installer on Windows, an AppImage and snap package on Linux, and a dmg on OS X.
 
 ## Publishing and auto-update
 
@@ -47,12 +47,12 @@ This is currently configured to use `generic`, so it can run from a static serve
 ```    
 
 `main.js` has a minimal updater implementation that will start the auto-updater when application starts (skipped in dev mode), and install updates when application is restarted.
-So far this has only been tried on Windows (using nsis installer exe) and Ubuntu 18.04 (using AppImage).
+This should work on Windows (using nsis installer exe), Ubuntu 18.04 (using AppImage), and OS X (using DMG).
 
 To try this:
 
 1. Package the application using `yarn dist`
-2. Install the application using the installer in `dist` directory (the auto-updater is not started in dev mode). This is only needed for the first version used. On Windows, double-click the nsis installer .exe, on Linux just copy the AppImage somewhere convenient, make it executable if needed, and double click to test running.
+2. Install the application using the appropriate installer/file in `dist` directory (installation is necessary since the auto-updater is not started in dev mode). This is only needed for the first version used, after this the application will update itself.
 3. Increment the version number in `package.json`, and make some change to the application (e.g. the text in the card in `Main.scala`).
 4. Package the new version using `yarn dist`
 5. In the project root, run an http server serving the `dist` directory - this is our "generic" build server:
@@ -67,5 +67,4 @@ See [electron updater example](https://github.com/iffy/electron-updater-example)
 ## TODO
 
 1. It should be possible to replicate `main.js` in scalajs with an appropriate facade to electron API, and then simply require and run this from a stub in `main.js`.
-2. Check running, packaging, installing (via dmg) and auto-updating on OS X
-3. Add notifications in the main window when update is available, to demonstrate IPC.
+2. Add notifications in the main window when update is available, to demonstrate IPC.
