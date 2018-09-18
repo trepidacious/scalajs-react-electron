@@ -64,6 +64,14 @@ node_modules/.bin/http-server dist/ -p 8080
 
 See [electron updater example](https://github.com/iffy/electron-updater-example) for more details.
 
+## Misc
+
+Logging is via `electron-log`, log locations:
+
+ * Linux: `~/.config/<app name>/log.log`
+ * OS X: `~/Library/Logs/<app name>/log.log`
+ * Windows: `%USERPROFILE%\AppData\Roaming\<app name>\log.log`
+
 ## TODO
 
 1. It should be possible to replicate `main.js` in scalajs with an appropriate facade to electron API, and then simply require and run this from a stub in `main.js`.
