@@ -25,7 +25,8 @@
     "appId": "org.rebeam.scalajs-react-electron",
     "files": [
       "src",
-      "scalajs_src"
+      "scalajs_src",
+      "assets"
     ],
     "mac": {
       "category": "public.app-category.developer-tools"
