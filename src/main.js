@@ -8,7 +8,7 @@ const path = require('path')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-const isDevMode = process.execPath.match(/[\\/]electron/);
+const isDev = require('electron-is-dev');
 
 function createWindow () {
   // Create the browser window.
@@ -67,9 +67,12 @@ app.on('activate', function () {
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
+if (isDev) {
+  log.info('DEV MODE');
+}
 
 app.on('ready', function()  {
-  if (!isDevMode) {
+  if (!isDev) {
     autoUpdater.checkForUpdatesAndNotify();
   }
 });
