@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "dist-all": "electron-builder -mwl --ia32 --x64"
   },
   "repository": "https://github.com/trepidacious/scalajs-react-electron",
   "keywords": [
@@ -35,7 +36,8 @@
       "createDesktopShortcut": "always"
     },
     "linux": {
-      "category": "Development"
+      "category": "Development",
+      "target": "AppImage"
     },
     "publish": [
       {
