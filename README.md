@@ -28,7 +28,7 @@ The project has a fairly simple structure:
 
 The project doesn't use electron-webpack or electron-forge. As far as I can tell these only really help with transpiling javascript alternatives to javascript, and we are only using plain javascript and scalajs. The project is significantly quicker to start up electron than previous versions using electron-forge and electron-webpack. This does mean that hot-reload is not supported, which might not be a bad thing. Reload the page for scalajs changes, and restart with `npm start` for main.js changes.
 
-For packaging, the project uses electron-builder, with a simple configuration in `package.json`. Run `yarn dist` to build and package. This will produce an nsis installer on Windows, an AppImage and snap package on Linux, and a dmg on OS X.
+For packaging, the project uses electron-builder, with a simple configuration in `package.json`. Run `yarn dist` to build and package. This will produce an nsis installer on Windows, an AppImage package on Linux, and a dmg on OS X. To build for all platforms run `yarn dist-all` - this has only been tested on OS X, see electron-build docs for details. Note that building of linux snap images is disabled since it fails for 32-bit target on OS X, and testing of the resulting snap file indicates that installation is more complex (requires running installer from command line) and takes longer to install and start up than AppImage, which seems to work perfectly at least on Ubuntu 18.04. 
 
 ## Publishing and auto-update
 
